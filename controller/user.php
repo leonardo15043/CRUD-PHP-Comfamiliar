@@ -9,6 +9,15 @@ class userController{
         $this->model = new user();
     }
 
+    
+    public function getAllUsers(){
+
+        $data = new user();
+        $data = $this->model->getAll();
+        
+        return $data;
+    }
+
     public function listGuardian(){
 
         $data = new user();

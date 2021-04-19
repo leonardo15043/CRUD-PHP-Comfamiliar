@@ -10,6 +10,14 @@ class User{
 		$this->pdo = Database::connection();     
 	}
 
+	public function getAll(){
+
+		$stm = $this->pdo->prepare("SELECT u.*, tu.role FROM user as u INNER JOIN type_user as tu ON u.type_user = tu.id_typeuser");
+		$stm->execute();
+		return $stm->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
     public function getAllGuardianStudent(){
 
 		$stm = $this->pdo->prepare("SELECT * FROM user as u INNER JOIN relationship as r ON u.id_user = r.id_guardian");
