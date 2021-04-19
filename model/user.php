@@ -18,6 +18,14 @@ class User{
 
     }
 
+	public function getUser($id){
+	
+		$stm = $this->pdo->prepare("SELECT * FROM user WHERE id_user = ? ");	
+		$stm->execute(array($id));
+		return $stm->fetch(PDO::FETCH_OBJ);
+		
+    }
+
     public function getAllGuardianStudent(){
 
 		$stm = $this->pdo->prepare("SELECT * FROM user as u INNER JOIN relationship as r ON u.id_user = r.id_guardian");
@@ -39,6 +47,11 @@ class User{
         $result = array($user['name'],$user['surname'],$user['date_birth'],$user['phone'],$user['identification'],$user['city'],$user['address'],1,$user['type_user'],date("Y-m-d"),date("Y-m-d") );
 		$stm = $this->pdo->prepare("INSERT INTO user (name,surname,date_birth,phone,identification,city,address,enabled,type_user,creation_date,update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
 	    $stm->execute($result); 
+    }
+
+	public function deleteUser($id){
+        $stm = $this->pdo->prepare("DELETE FROM user WHERE id_user = ?");			          
+        $stm->execute(array($id));
     }
 
 }

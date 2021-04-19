@@ -18,6 +18,10 @@ class userController{
         return $data;
     }
 
+    public function getUser($id){
+       return $this->model->getUser($id);
+    }
+
     public function listGuardian(){
 
         $data = new user();
@@ -37,6 +41,11 @@ class userController{
     public function addUser($user){
         $data = new user();
         $data = $this->model->addUser($user);
+    }
+
+    public function delete($id){
+        $data = new user();
+        $data = $this->model->deleteUser($id);
     }
     
 }
