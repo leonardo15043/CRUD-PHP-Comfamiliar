@@ -21,9 +21,10 @@ if(isset($_GET['id_user'])){
 <body>
 <div class="container mt-5">
         <h1>Editar Usuario</h1>
-    <form action="?action=save" method="post" enctype="multipart/form-data">
+    <form action="?action=save&id_user=<?php echo $_GET['id_user']; ?>" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Nombres</label>
+        <input type="hidden" class="form-control" id="id_user" name="id_user" value="<?php echo $data->id_user; ?>">
         <input type="text" class="form-control" id="name" name="name" value="<?php echo $data->name; ?>">
     </div>
     <div class="form-group">

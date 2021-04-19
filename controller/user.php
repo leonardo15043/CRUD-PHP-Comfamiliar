@@ -37,6 +37,11 @@ class userController{
         return $data;
     }
 
+    public function editUser($user){
+        $data = new user();
+        $data = $this->model->editUser($user);
+    }
+
     public function addUser($user){
         $data = new user();
         $data = $this->model->addUser($user);

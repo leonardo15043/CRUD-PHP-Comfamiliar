@@ -49,6 +49,13 @@ class User{
 	    $stm->execute($result); 
     }
 
+	public function editUser($user){
+
+        $result = array($user['name'],$user['surname'],$user['date_birth'],$user['phone'],$user['identification'],$user['city'],$user['address'],1,$user['type_user'],date("Y-m-d"),date("Y-m-d"),$user['id_user']);
+		$stm = $this->pdo->prepare("UPDATE  user SET name = ?,surname = ?,date_birth = ?,phone = ?,identification = ?,city = ?,address = ?,enabled = ?,type_user = ?,creation_date = ?,update_date = ?  WHERE id_user = ?");	
+	    $stm->execute($result); 
+    }
+
 	public function addGuardianStuden($user){
 
         $result = array($user['name'],$user['surname'],$user['date_birth'],$user['phone'],$user['identification'],$user['city'],$user['address'],1,$user['type_user'],date("Y-m-d"),date("Y-m-d") );
