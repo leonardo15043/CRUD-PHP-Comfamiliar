@@ -9,10 +9,18 @@ class userController{
         $this->model = new user();
     }
 
-    public function listUsers(){
+    public function listGuardian(){
 
         $data = new user();
-        $data = $this->model->getAll();
+        $data = $this->model->getAllGuardianStudent();
+        
+        return $data;
+    }
+    
+    public function listStudenttoGuardian($id){
+
+        $data = new user();
+        $data = $this->model->getStudenttoGuardian($id);
         
         return $data;
     }
