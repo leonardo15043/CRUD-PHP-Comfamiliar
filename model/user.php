@@ -43,10 +43,26 @@ class User{
     }
 
 	public function addUser($user){
-	
+
         $result = array($user['name'],$user['surname'],$user['date_birth'],$user['phone'],$user['identification'],$user['city'],$user['address'],1,$user['type_user'],date("Y-m-d"),date("Y-m-d") );
 		$stm = $this->pdo->prepare("INSERT INTO user (name,surname,date_birth,phone,identification,city,address,enabled,type_user,creation_date,update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
 	    $stm->execute($result); 
+    }
+
+	public function addGuardianStuden($user){
+
+        $result = array($user['name'],$user['surname'],$user['date_birth'],$user['phone'],$user['identification'],$user['city'],$user['address'],1,$user['type_user'],date("Y-m-d"),date("Y-m-d") );
+		$stm = $this->pdo->prepare("INSERT INTO user (name,surname,date_birth,phone,identification,city,address,enabled,type_user,creation_date,update_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");	
+		$stm->execute($result);
+		
+		$stm1 = $this->pdo->prepare("SELECT * FROM user ORDER BY id_user desc LIMIT 1");
+		$stm1->execute();
+		$data_csv = $stm1->fetch(PDO::FETCH_OBJ);
+
+		$result3 = array($data_csv->id_user,$user['id_student'],date("Y-m-d"),date("Y-m-d") );
+		$stm3 = $this->pdo->prepare("INSERT INTO relationship (id_guardian,id_student,creation_date,update_date) VALUES (?, ?, ?, ?)");	
+		$stm3->execute($result3);
+
     }
 
 	public function deleteUser($id){
